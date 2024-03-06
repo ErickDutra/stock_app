@@ -1,4 +1,3 @@
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -17,7 +16,17 @@ class ProductFormState extends State<ProductForm> {
   final amountController = TextEditingController();
   DateTime selectedDate = DateTime.now();
 
-  
+  _submitForm() {
+    final title = titleController.text;
+    final amount = int.tryParse(amountController.text) ?? 0;
+    final date = selectedDate;
+
+    if (title.isEmpty || amount <= 0) {
+      return;
+    }
+
+    widget.onSubmit(title, amount, date);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +46,7 @@ class ProductFormState extends State<ProductForm> {
             TextField(
               onChanged: (newValue) {},
               controller: amountController,
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
               decoration: InputDecoration(
                 labelText: 'Amount',
               ),
@@ -61,13 +71,9 @@ class ProductFormState extends State<ProductForm> {
                   },
                 ),
                 ElevatedButton(
-                    onPressed: () {
-                      final title = titleController.text;
-                      final amount = int.tryParse(amountController.text) ?? 0;
-                      final date = selectedDate;
-                      widget.onSubmit(title, amount, date);
-                    },
-                    child: Text('Cadastrar Produto'))
+                    onPressed: _submitForm,
+                    child: Text('Cadastrar Produto'),
+                    ),
               ],
             ),
           ],

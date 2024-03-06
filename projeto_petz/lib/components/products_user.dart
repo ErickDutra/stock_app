@@ -42,7 +42,7 @@ class _ProductsUserState extends State<ProductsUser> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [ProductList(_products), ProductForm(_addProduct)],
+      children: [ ProductForm(_addProduct),ProductList(_products),],
     );
   }
 }
