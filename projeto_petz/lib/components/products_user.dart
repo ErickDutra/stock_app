@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:projeto_petz/components/products_list.dart';
 import '../models/products.dart';
 import 'product_form.dart';
@@ -28,21 +29,38 @@ class _ProductsUserState extends State<ProductsUser> {
     )
   ];
 
+  _openForm() => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: Container(
+            height: 280,
+            child: ProductForm(_addProduct),
+          ),
+        ),
+      );
+
   _addProduct(String title, int amount, DateTime date) {
-    final newProduct =Product(
-        id: Random().nextDouble().toString(),
-        title: title,
-        amount: amount,
-        date: date);
-        setState(() {
-          _products.add(newProduct);
-        });
+    final newProduct = Product(
+      id: Random().nextDouble().toString(),
+      title: title,
+      amount: amount,
+      date: date,
+    );
+    setState(() {
+      _products.add(newProduct);
+    });
+    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [ ProductForm(_addProduct),ProductList(_products),],
+      children: [
+        ProductList(_products),
+        Container(
+            child: ElevatedButton(
+                onPressed: _openForm, child: Text('Addict Product')))
+      ],
     );
   }
 }

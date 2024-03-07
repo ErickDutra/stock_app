@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -51,29 +52,37 @@ class ProductFormState extends State<ProductForm> {
                 labelText: 'Amount',
               ),
             ),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(
-                  child: Text(
-                      "${selectedDate.day} / ${selectedDate.month} / ${selectedDate.year} "),
-                  onPressed: () async {
-                    final DateTime? dateTime = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2005),
-                        lastDate: DateTime(2030));
-                    if (dateTime != null) {
-                      setState(() {
-                        selectedDate = dateTime;
-                      });
-                    }
-                  },
+                Row(
+                  children: [
+                    Text("Validate: ",
+                        style: TextStyle(
+                            fontSize: 19,
+                            color: Color.fromARGB(197, 32, 37, 32))),
+                    ElevatedButton(
+                      child: Text(
+                          "${selectedDate.day} / ${selectedDate.month} / ${selectedDate.year} "),
+                      onPressed: () async {
+                        final DateTime? dateTime = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2005),
+                            lastDate: DateTime(2030));
+                        if (dateTime != null) {
+                          setState(() {
+                            selectedDate = dateTime;
+                          });
+                        }
+                      },
+                    ),
+                  ],
                 ),
                 ElevatedButton(
-                    onPressed: _submitForm,
-                    child: Text('Cadastrar Produto'),
-                    ),
+                  onPressed: _submitForm,
+                  child: Text('Cadastrar Produto'),
+                ),
               ],
             ),
           ],

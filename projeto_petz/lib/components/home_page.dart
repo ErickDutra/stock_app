@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+
 import 'products_user.dart';
+import 'profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -50,7 +52,6 @@ class _HomePageState extends State<HomePage> {
         children: [
           ProfilePage(),
           SingleChildScrollView(child: ProductsUser()),
-          MenuPage()
         ],
         onPageChanged: setPageActual,
       ),
@@ -59,31 +60,12 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.menu), label: "Menu"),
         ],
         onTap: (page) {
           pc.animateToPage(page,
               duration: Duration(milliseconds: 400), curve: Curves.linear);
         },
       ),
-    );
-  }
-}
-
-class MenuPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text('Page 2'),
-    );
-  }
-}
-
-class ProfilePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text('Page 0'),
     );
   }
 }

@@ -24,7 +24,7 @@ class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: 500,
       child: ListView.builder(
         itemCount: widget.products.length,
         itemBuilder: (ctx, index) {
@@ -72,9 +72,12 @@ class _ProductListState extends State<ProductList> {
                             fontWeight: FontWeight.normal,
                             fontSize: 20,
                             color:
-                                calculateDaysDifference(dataToday, pr.date) < 30
-                                    ? const Color.fromARGB(255, 226, 110, 102)
+                                calculateDaysDifference(dataToday, pr.date) <= 15
+                                    ? Color.fromARGB(255, 226, 110, 102)
+                                    : calculateDaysDifference(dataToday, pr.date) < 30
+                                    ? Color.fromRGBO(233, 152, 61, 1)
                                     : Colors.green,
+                                  
                           ),
                         ),
                       ],
